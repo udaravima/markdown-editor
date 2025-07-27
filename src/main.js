@@ -2,8 +2,6 @@ import Storehouse from "storehouse-js";
 import * as monaco from "monaco-editor";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-// If using html2pdf.js via CDN, use window.html2pdf; if installed via npm, use import
-import html2pdf from "html2pdf.js";
 // import "github-markdown-css";
 
 const init = () => {
@@ -293,7 +291,7 @@ This web site is using ${"`"}markedjs/marked${"`"}.
                 pdfOptionsDiv.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
                 pdfOptionsDiv.innerHTML = `
             <label> Prefix filename:
-            <input id="pdf-prefix" type="text" value="markdown-preview-${formattedDate}" />
+            <input id="pdf-prefix" type="text" value="markdown-preview" />
             </label>
             <label>
             Margin (inches):
@@ -328,6 +326,7 @@ This web site is using ${"`"}markedjs/marked${"`"}.
                         document.body.removeChild(pdfOptionsDiv);
 
                         resolve({ margin, orientation, prefix });
+                        console.log("PDF options form above:", opt);
                     };
                     document.getElementById("pdf-cancel").onclick = () => {
                         document.body.removeChild(pdfOptionsDiv);
@@ -342,7 +341,8 @@ This web site is using ${"`"}markedjs/marked${"`"}.
                         if (!isNaN(margin) && margin >= 0) {
                             opt.margin = margin;
                         }
-                        html2pdf().set(opt).from(preview).save();
+                        console.log("PDF options:", opt); // Debugging
+                        window.html2pdf().set(opt).from(preview).save()
                     })
                     .catch(() => {
                         // alert("PDF generation cancelled.");
