@@ -1,5 +1,5 @@
 import Storehouse from 'storehouse-js';
-import * as monaco from 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/+esm';
+import * as monaco from 'monaco-editor';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import 'github-markdown-css/github-markdown-light.css';
@@ -94,7 +94,7 @@ This web site is using ${"`"}markedjs/marked${"`"}.
         let editor = monaco.editor.create(document.querySelector('#editor'), {
             fontSize: 14,
             language: 'markdown',
-            minimap: { enabled: false },
+            minimap: { enabled: true },
             scrollBeyondLastLine: false,
             automaticLayout: true,
             scrollbar: {
@@ -103,9 +103,9 @@ This web site is using ${"`"}markedjs/marked${"`"}.
             },
             wordWrap: 'on',
             hover: { enabled: false },
-            quickSuggestions: false,
-            suggestOnTriggerCharacters: false,
-            folding: false
+            quickSuggestions: true,
+            suggestOnTriggerCharacters: true,
+            folding: true
         });
 
         editor.onDidChangeModelContent(() => {
