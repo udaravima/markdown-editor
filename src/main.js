@@ -516,13 +516,13 @@ window.addEventListener("load", () => {
             document.querySelector("#code-theme-toggle a").innerHTML = "🌚 Code";
             monaco.editor.setTheme("vs-dark");
             document.querySelector("#markdown-theme").href =
-                "/css/github-markdown-dark.css";
+                "./css/github-markdown-dark.css";
         } else {
             document.querySelector("#theme-toggle a").innerHTML = "🌞 Theme";
             document.querySelector("#code-theme-toggle a").innerHTML = "🌞 Code";
             monaco.editor.setTheme("vs");
             document.querySelector("#markdown-theme").href =
-                "/css/github-markdown-light.css";
+                "./css/github-markdown-light.css";
         }
     });
 });
