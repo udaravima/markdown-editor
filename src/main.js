@@ -2,7 +2,8 @@ import Storehouse from "storehouse-js";
 import * as monaco from "monaco-editor";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import html2pdf from "html2pdf";
+// If using html2pdf.js via CDN, use window.html2pdf; if installed via npm, use import
+import html2pdf from "html2pdf.js";
 // import "github-markdown-css";
 
 const init = () => {
@@ -256,9 +257,11 @@ This web site is using ${"`"}markedjs/marked${"`"}.
         document
             .querySelector("#download-pdf-button")
             .addEventListener("click", (event) => {
-                event.preventDefault();
                 const preview = document.querySelector("#output");
-                // console.log(preview); // Debugging
+                if (!preview || !preview.innerHTML.trim()) {
+                    alert("Nothing to download. Please enter some markdown first.");
+                    return;
+                }
                 // Let the user choose PDF options
                 const now = new Date();
                 const pad = (n) => n.toString().padStart(2, "0");
